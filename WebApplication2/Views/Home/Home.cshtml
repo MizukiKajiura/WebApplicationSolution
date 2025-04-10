@@ -399,7 +399,24 @@
     //step5目標：ClickDeleteTodo()を修正し、HomeControllerクラスのDeleteDataTodo()を呼び出して、データを削除して下さい。
     //ヒント：ClickDelete()を参考にして下さい。
     function ClickDeleteTodo(id) {
-        
+        $.ajax({
+            url:"/Home/DeleteDataTodo",
+            type:"POST",
+            data: { id: id },
+            success: function (data) {
+                if (data.result == true) {
+                    alert("Success");
+                    $('#tableTodo').empty();
+                    ClickGetDataTodo();
+                }
+                else {
+                    alert("Error");
+                }
+            },
+            error: function (error) {
+                alert("Error");
+            }
+        });
     }
 
 </script>
